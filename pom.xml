@@ -17,7 +17,7 @@
         <docker.image.prefix>kammana</docker.image.prefix>
         <sonar.host.url>http://18.181.164.81:9000/</sonar.host.url>
 
-        <!-- Java version (adjust if needed: 8 / 11 / 17) -->
+        <!-- Java version -->
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
@@ -31,17 +31,26 @@
         </dependency>
     </dependencies>
 
-    <!-- 🔴 THIS IS THE MAIN FIX -->
+    <!-- 🔹 Build Plugins -->
     <build>
         <plugins>
+            <!-- WAR plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.4.0</version>
             </plugin>
+
+            <!-- Sonar Maven plugin -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.11.1.2318</version>
+            </plugin>
         </plugins>
     </build>
 
+    <!-- 🔹 Distribution Management (Nexus) -->
     <distributionManagement>
         <snapshotRepository>
             <id>nexusRepo</id>
@@ -54,11 +63,12 @@
         </repository>
     </distributionManagement>
 
+    <!-- 🔹 Plugin Repositories -->
     <pluginRepositories>
         <pluginRepository>
-            <id>maven1</id>
-            <name>Maven.org</name>
-            <url>http://repo1.maven.org/maven2</url>
+            <id>central</id>
+            <name>Maven Central</name>
+            <url>https://repo.maven.apache.org/maven2</url>
         </pluginRepository>
     </pluginRepositories>
 
